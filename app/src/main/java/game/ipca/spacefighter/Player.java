@@ -3,6 +3,7 @@ package game.ipca.spacefighter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 /**
  * Created by lourencogomes on 22/11/17.
@@ -37,7 +38,7 @@ public class Player {
     private int maxY;
     private int minY;
 
-    private static final int GRAVITY = 10;
+    private static final int GRAVITY = -10;
     private static final int MIN_SPEED = 1;
     private static final int MAX_SPEED = 20;
 
@@ -47,11 +48,12 @@ public class Player {
         speed=1;
         bitmap= BitmapFactory.decodeResource(context.getResources(),R.drawable.player);
 
-        maxY=screenY;
+        maxY=screenY - bitmap.getHeight();
         minY=0;
     }
 
     public void update(){
+
        if(boosting)speed +=2;
        else speed -=5;
        if(speed > MAX_SPEED) speed = MAX_SPEED;
@@ -59,8 +61,9 @@ public class Player {
 
        y -=speed+GRAVITY;
 
-       if (y<minY) y=minY;
        if (y>maxY) y=maxY;
+       if (y<minY) y=minY;
+
     }
 
     public void setBoosting(){
