@@ -6,30 +6,10 @@ import java.util.Random;
  * Created by lourencogomes on 22/11/17.
  */
 
-public class Star {
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    private int x;
-    private int y;
-    private int speed=0;
-    private int maxY;
-    private int minY;
-    private int maxX;
-    private int minX;
+public class Star extends Sprite{
 
     public Star(int screenX, int screenY){
-        maxX = screenX;
-        maxY = screenY;
-        minX = 0;
-        minY = 0;
-
+        super(screenX,screenY);
         Random generator = new Random();
         speed= generator.nextInt(10);
 
@@ -38,6 +18,7 @@ public class Star {
 
     }
 
+    @Override
     public void update(int playerSpeed){
         x-=playerSpeed;
         x-=speed;

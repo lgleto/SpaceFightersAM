@@ -9,53 +9,29 @@ import android.util.Log;
  * Created by lourencogomes on 22/11/17.
  */
 
-public class Player {
-
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    private Bitmap bitmap;
-    private int x;
-    private int y;
+public class Player extends Sprite {
 
     private boolean boosting=false;
-
-    private int speed=0;
-
-    private int maxY;
-    private int minY;
 
     private static final int GRAVITY = -10;
     private static final int MIN_SPEED = 1;
     private static final int MAX_SPEED = 20;
 
-    public Player(Context context, int screenX, int screenY){
+    public Player(Bitmap bitmap, int screenX, int screenY){
+        super(bitmap,screenX,screenY);
         x=75;
         y=50;
         speed=1;
-        bitmap= BitmapFactory.decodeResource(context.getResources(),R.drawable.player);
-
-        maxY=screenY - bitmap.getHeight();
-        minY=0;
     }
 
-    public void update(){
+    @Override
+    public void update(int playerSpeed){
 
-       if(boosting)speed +=2;
-       else speed -=5;
+        super.update(playerSpeed);
+       if(boosting)
+           speed +=2;
+       else
+           speed -=5;
        if(speed > MAX_SPEED) speed = MAX_SPEED;
        if(speed < MIN_SPEED) speed = MIN_SPEED;
 
